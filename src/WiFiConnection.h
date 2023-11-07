@@ -9,7 +9,7 @@ void ConnectToWifi(){
     Serial.println();
     Serial.print("Waiting for WiFi...");
 
-    WiFi.mode(WIFI_STA); //設置WiFi模式
+    WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, pwd);
 
     while(WiFi.status() != WL_CONNECTED) {

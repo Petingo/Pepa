@@ -22,7 +22,6 @@ public:
 
 
 HttpResponse::HttpResponse(const char *response) {
-    Serial.println(response);
     Parse(response);
 }
 
@@ -98,7 +97,6 @@ void HttpResponse::Parse(const char* response) {
     }
 
     printf("body: %s\n", body.c_str());
-
 
 }
 

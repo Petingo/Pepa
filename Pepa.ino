@@ -1,3 +1,5 @@
+#include "src/custom_paint.h"
+
 #include <stdlib.h>
 #include <WiFi.h>
 #include <ESP32Time.h>
@@ -5,51 +7,77 @@
 #include "DEV_Config.h"
 #include "EPD.h"
 #include "GUI_Paint.h"
-#include "WiFIConnection.h"
-#include "HttpRequest.h"
-#include "HttpResponse.h"
 
-ESP32Time rtc;
-WiFiClient client;
+// #include "src/WiFIConnection.h"
+// #include "src/http/HttpRequest.h"
+// #include "src/http/HttpResponse.h"
+
+// ESP32Time rtc;
+// WiFiClient client;
 
 // API
-const char host[] = "hs.petingo.ch";
-const int port = 5566;
+// const char host[] = "hs.petingo.ch";
+// const int port = 5566;
 
-const char pathTime[] = "/time";
+// const char pathTime[] = "/time";
+
+// E-paper
+// Create a new image cache
+UBYTE *BlackImage;
 
 void setup() {
-    Serial.begin(115200);
-    delay(10);
+    // Serial.begin(115200);
+    // delay(10);
     
-    ConnectToWifi();
+    // ConnectToWifi();
 
-    Serial.println("Sync time with server...");
-    HttpResponse timeResponse = httpGet(client, host, port, pathTime);
-    rtc.setTime(timeResponse.body.toInt() + 3600); // covert to UTC+1
-    Serial.println("Time is set to: " + rtc.getDateTime());
+    // // Sync time with server
+    // Serial.println("Sync time with server...");
+    // HttpResponse timeResponse = httpGet(client, host, port, pathTime);
+    // rtc.setTime(timeResponse.body.toInt() + 3600); // covert to UTC+1
+    // Serial.println("Time is set to: " + rtc.getDateTime());
 
-    // printf("EPD_3IN7_test Demo\r\n");
-    // DEV_Module_Init();
+    // Setup E-paper
+    DEV_Module_Init();
+    EPD_3IN7_4Gray_Init();
+    EPD_3IN7_4Gray_Clear();
+    DEV_Delay_ms(500);
 
-    // printf("e-Paper Init and Clear...\r\n");
-    // EPD_3IN7_4Gray_Init();
-    // EPD_3IN7_4Gray_Clear();
-    // DEV_Delay_ms(500);
+    UWORD Imagesize = ((EPD_3IN7_WIDTH % 4 == 0)? (EPD_3IN7_WIDTH / 4 ): (EPD_3IN7_WIDTH / 4 + 1)) * EPD_3IN7_HEIGHT;
+    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
+        Serial.println("Failed to apply for black memory...\r\n");
+        while(1);
+    }
 
-    // //Create a new image cache
-    // UBYTE *BlackImage;
+    Paint_NewImage(BlackImage, EPD_3IN7_WIDTH, EPD_3IN7_HEIGHT, 180, WHITE);
+    Paint_SetScale(4);
+    Paint_Clear(WHITE);
 
-    // UWORD Imagesize = ((EPD_3IN7_WIDTH % 4 == 0)? (EPD_3IN7_WIDTH / 4 ): (EPD_3IN7_WIDTH / 4 + 1)) * EPD_3IN7_HEIGHT;
-    // if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
-    //     printf("Failed to apply for black memory...\r\n");
-    //     while(1);
-    // }
+    // Paint_DrawString_EN(10, 150, "GRAY1 with black background", &Font24, BLACK, GRAY1);
 
-    // printf("Paint_NewImage\r\n");
-    // Paint_NewImage(BlackImage, EPD_3IN7_WIDTH, EPD_3IN7_HEIGHT, 0, WHITE);
-    // Paint_SetScale(4);
-    // Paint_Clear(WHITE);
+    Paint_DrawString_EN(10, 10, "23:35", &Font24, WHITE, BLACK);
+    Paint_DrawString_EN(10, 36, "19.6C 34%", &Font16, WHITE, GRAY3);
+
+    // // Create test todo-list
+    String todoList[] = {
+        "1.Buy milk",
+        "2.Buy eggs",
+        "3.Buy bread",
+        "4.Buy butter",
+        "5.This is a very long long long long todo list we should be able to wrap it to the next line",
+        "6.I hope this one works",
+        "7.WWWWWWWWWWWWWHHHHHHHHHHHAAAAAAAATTTTTTTTTT"
+    };
+
+    UWORD anchorX = 10, anchorY = 100;
+    for(int i = 0; i < 7; i++){
+        anchorY = DrawWrappedString(anchorX, anchorY, todoList[i].c_str(), &Font16, WHITE, BLACK);
+        anchorY += 24;
+    }
+
+    EPD_3IN7_4Gray_Display(BlackImage);
+
+    
     
 
     // // Drawing on the image, partial display
@@ -78,16 +106,25 @@ void setup() {
     // // Paint_DrawString_EN(0, 0, WiFi.localIP().toString().c_str(), &Font12, BLACK, WHITE);
 
     // printf("EPD_Display\r\n");
-    // EPD_3IN7_4Gray_Display(BlackImage);
-    // DEV_Delay_ms(4000);
 }
 
-
-// 
-
-
-
 void loop() {
-  Serial.println("Current time: " + rtc.getDateTime());
-  delay(5000);
+    // Paint_SelectImage(BlackImage);
+    // Paint_SetScale(2);
+    // Paint_Clear(WHITE);
+
+    // PAINT_TIME sPaint_time;
+    // sPaint_time.Sec = rtc.getSecond();
+    // sPaint_time.Min = rtc.getMinute();
+    // sPaint_time.Hour = rtc.getHour();
+    // Paint_ClearWindows(0, 300, 80, 479, WHITE);
+    // Paint_DrawTime(20, 300, &sPaint_time, &Font20, WHITE, BLACK);
+
+    // printf("Part refresh...\r\n");
+    // EPD_3IN7_1Gray_Display(BlackImage);
+    // // EPD_3IN7_1Gray_Display_Part(BlackImage, 0, 0, 279, 180);
+    // DEV_Delay_ms(500);
+    
+    // Serial.println("Current time: " + rtc.getDateTime());
+    // delay(5000);
 }
