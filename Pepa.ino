@@ -1,7 +1,7 @@
 #include "src/custom_paint.h"
 
 #include <stdlib.h>
-#include <WiFi.h>
+// #include <WiFi.h>
 #include <ESP32Time.h>
 
 #include "DEV_Config.h"
@@ -12,31 +12,41 @@
 // #include "src/http/HttpRequest.h"
 // #include "src/http/HttpResponse.h"
 
-// ESP32Time rtc;
+// // ESP32Time rtc;
 // WiFiClient client;
 
 // API
-// const char host[] = "hs.petingo.ch";
-// const int port = 5566;
+const char host[] = "http://europe-west6-pepa-404619.cloudfunctions.net";
+const int port = 80;
 
-// const char pathTime[] = "/time";
+const char pathGetTime[] = "getTime";
 
 // E-paper
 // Create a new image cache
 UBYTE *BlackImage;
 
 void setup() {
-    // Serial.begin(115200);
-    // delay(10);
+    Serial.begin(115200);
+    delay(10);
+    Serial.println("Begin setup");
+    
     
     // ConnectToWifi();
 
     // // Sync time with server
     // Serial.println("Sync time with server...");
-    // HttpResponse timeResponse = httpGet(client, host, port, pathTime);
+    // HttpResponse time = httpGet(client, host, port, pathGetTime);
+    // Serial.println(time.body);
+
+    int year = 2023, month=11, day=11, hour=11, minute=11, second=11;
+    // sscanf(time.body.c_str(), "%d/%d/%d %d:%d:%d", year, month, day, hour, minute, second);
+
+    
+
     // rtc.setTime(timeResponse.body.toInt() + 3600); // covert to UTC+1
     // Serial.println("Time is set to: " + rtc.getDateTime());
-
+    
+    Serial.println("Init E-paper...");
     // Setup E-paper
     DEV_Module_Init();
     EPD_3IN7_4Gray_Init();
@@ -54,13 +64,15 @@ void setup() {
     Paint_Clear(WHITE);
 
     // Paint_DrawString_EN(10, 150, "GRAY1 with black background", &Font24, BLACK, GRAY1);
+    char timeString[6];
+    sprintf(timeString, "%02d:%02d", hour, minute);
 
-    Paint_DrawString_EN(10, 10, "23:35", &Font24, WHITE, BLACK);
+    Paint_DrawString_EN(10, 10, timeString, &Font24, WHITE, BLACK);
     Paint_DrawString_EN(10, 36, "19.6C 34%", &Font16, WHITE, GRAY3);
 
     // // Create test todo-list
     String todoList[] = {
-        "1.Buy milk",
+        "Hello Kai",
         "2.Buy eggs",
         "3.Buy bread",
         "4.Buy butter",

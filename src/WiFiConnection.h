@@ -1,6 +1,6 @@
 #include <WiFi.h>
 
-const char* ssid = "Andy's iPhone";
+const char* ssid = "iPhone";
 const char* pwd  = "meowmeow";
 
 void ConnectToWifi(){

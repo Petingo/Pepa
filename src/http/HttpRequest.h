@@ -19,7 +19,7 @@ HttpResponse httpGet(WiFiClient client, const char* host, int port, const char* 
     while (!client.available() && maxloops < 1000)
     {
         maxloops++;
-        delay(1); //delay 1 msec
+        delay(10); //delay 1 msec
     }
     
     if (client.available() > 0)
