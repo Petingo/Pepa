@@ -3,11 +3,13 @@
 
 #include <stdint.h>
 
-#include "lib/DEV_Config.h"
-#include "lib/EPD.h"
-#include "lib/GUI_Paint.h"
+#include "EInk/DEV_Config.h"
+#include "EInk/EPD.h"
+#include "EInk/GUI_Paint.h"
 #include "CustomPaint.h"
 
+namespace pepa
+{   
 class App
 {
 public:
@@ -16,10 +18,14 @@ public:
     void init();
     void displayTest1();
     void displayTest2();
+    
+    void getNextDepartureTime();
 
 private:
     uint8_t *m_displayBuffer;
     uint16_t m_displaySize;
 };
+
+} // namespace pepa
 
 #endif

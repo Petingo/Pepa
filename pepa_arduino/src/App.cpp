@@ -1,5 +1,10 @@
 #include "App.h"
 
+#include "TimetableInstance.h"
+
+namespace pepa
+{
+
 App::App()
 {
     m_displaySize = ((EPD_3IN7_WIDTH % 4 == 0) ? (EPD_3IN7_WIDTH / 4) : (EPD_3IN7_WIDTH / 4 + 1)) * EPD_3IN7_HEIGHT;
@@ -22,6 +27,9 @@ void App::init()
     Paint_NewImage(m_displayBuffer, EPD_3IN7_WIDTH, EPD_3IN7_HEIGHT, 0, WHITE);
     Paint_SetScale(4);
     Paint_Clear(WHITE);
+
+    initAllTimetables();
+    getNextDepartureTime();
 }
 
 void App::displayTest1()
@@ -50,3 +58,24 @@ void App::displayTest1()
 
     EPD_3IN7_4Gray_Display(m_displayBuffer);
 }
+
+void App::getNextDepartureTime()
+{
+    int hour, minute;
+    s_bus24.getNextDepartureTime(2, 7, 33, false, hour, minute);
+    Serial.println("Next departure time: " + String(hour) + ":" + String(minute));
+    delay(50);
+
+    s_bus24.getNextDepartureTime(2, 9, 0, false, hour, minute);
+    Serial.println("Next departure time: " + String(hour) + ":" + String(minute));
+    delay(50);
+
+    s_bus24.getNextDepartureTime(2, 3, 2, false, hour, minute);
+    Serial.println("Next departure time: " + String(hour) + ":" + String(minute));
+    delay(50);
+
+    s_bus24.getNextDepartureTime(2, 23, 2, false, hour, minute);
+    Serial.println("Next departure time: " + String(hour) + ":" + String(minute));
+}
+
+} // namespace pepa

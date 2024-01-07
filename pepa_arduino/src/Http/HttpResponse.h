@@ -22,10 +22,15 @@ public:
 
 
 HttpResponse::HttpResponse(const char *response) {
-    Parse(response);
+    ParsePlainText(response);
 }
 
-void HttpResponse::Parse(const char* response) {
+void HttpResponse::ParsePlainText(const char* response)
+{
+    
+}
+
+void HttpResponse::ParseHTML(const char* response) {
     body = "";
     
     String buf = "";

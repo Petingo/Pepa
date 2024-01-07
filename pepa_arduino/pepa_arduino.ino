@@ -1,4 +1,5 @@
 #include "src/App.h"
+// #include "ESP32Time.h"
 
 // #include "src/WiFIConnection.h"
 // #include "src/http/HttpRequest.h"
@@ -14,7 +15,7 @@ const int port = 80;
 const char pathGetTime[] = "getTime";
 
 void setup() {
-    App app = App();
+    pepa::App app = pepa::App();
     app.init();
     
     app.displayTest1();
