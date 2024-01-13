@@ -1,18 +1,4 @@
 #include "src/App.h"
-// #include "ESP32Time.h"
-
-// #include "src/WiFIConnection.h"
-// #include "src/http/HttpRequest.h"
-// #include "src/http/HttpResponse.h"
-
-// ESP32Time rtc;
-// WiFiClient client;
-
-// API
-const char host[] = "http://europe-west6-pepa-404619.cloudfunctions.net";
-const int port = 80;
-
-const char pathGetTime[] = "getTime";
 
 void setup() {
     pepa::App app = pepa::App();

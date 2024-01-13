@@ -1,21 +1,18 @@
+#ifndef PEPA_WIFICONNECTION_H
+#define PEPA_WIFICONNECTION_H
+
 #include <WiFi.h>
 
-const char* ssid = "iPhone";
-const char* pwd  = "meowmeow";
+namespace pepa {
 
-void ConnectToWifi(){
-    // We start by connecting to a WiFi network
-    Serial.println();
-    Serial.println();
-    Serial.print("Waiting for WiFi...");
+class WiFiConnection
+{
+public:
+    static const char* SSID;
+    static const char* PWD;
+    static void Connect();
+};
 
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, pwd);
+} // pepa
 
-    while(WiFi.status() != WL_CONNECTED) {
-        Serial.print(".");
-        delay(500);
-    }
-
-    Serial.println("Connected");
-}
+#endif //PEPA_WIFICONNECTION_H

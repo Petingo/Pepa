@@ -3,10 +3,12 @@
 
 #include <stdint.h>
 
+#include "3rdparty/ESP32Time/ESP32Time.h"
 #include "EInk/DEV_Config.h"
 #include "EInk/EPD.h"
 #include "EInk/GUI_Paint.h"
 #include "CustomPaint.h"
+#include "ServerComm.h"
 
 namespace pepa
 {   
@@ -24,6 +26,8 @@ public:
 private:
     uint8_t *m_displayBuffer;
     uint16_t m_displaySize;
+    ServerComm m_serverComm;
+    ESP32Time m_rtc;
 };
 
 } // namespace pepa

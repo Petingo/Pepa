@@ -1,5 +1,5 @@
 #include "App.h"
-
+#include "WiFiConnection.h"
 #include "TimetableInstance.h"
 
 namespace pepa
@@ -22,12 +22,17 @@ void App::init()
     EPD_3IN7_4Gray_Init();
     EPD_3IN7_4Gray_Clear();
 
-    delay(500);
+    delay(50);
 
     Paint_NewImage(m_displayBuffer, EPD_3IN7_WIDTH, EPD_3IN7_HEIGHT, 0, WHITE);
     Paint_SetScale(4);
     Paint_Clear(WHITE);
 
+    // Init server communication
+    m_serverComm.init();
+    m_serverComm.updateTime(m_rtc);
+
+    // test
     initAllTimetables();
     getNextDepartureTime();
 }
