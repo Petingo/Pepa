@@ -31,32 +31,35 @@ void App::init()
     // Init server communication
     m_serverComm.init();
     m_serverComm.updateTime(m_rtc);
+    Serial.println("Current time: " + m_rtc.getDateTime());
+    delay(3000);
+    Serial.println("Current time (after 3sec): " + m_rtc.getDateTime());
+
+    // Init timetables
+    // initAllTimetables();
 
     // test
-    initAllTimetables();
-    getNextDepartureTime();
+    // getNextDepartureTime();
 }
 
 void App::displayTest1()
 {
     char timeString[6];
-    sprintf(timeString, "%02d:%02d", 11, 33);
+    sprintf(timeString, "%02d:%02d", m_rtc.getHour(true), m_rtc.getMinute());
 
     Paint_DrawString_EN(10, 10, timeString, &Font24, WHITE, BLACK);
     Paint_DrawString_EN(10, 36, "19.6C 34%", &Font16, WHITE, GRAY3);
 
-    // // Create test todo-list
-    String todoList[] = {
-        "1.Meow",
-        "2.Buy eggs",
-        "3.Buy bread",
-        "4.Buy butter",
-        "5.This is a very long long long long todo list we should be able to wrap it to the next line",
-        "6.I hope this one works",
-        "7.WWWWWWWWWWWWWHHHHHHHHHHHAAAAAAAATTTTTTTTTT"};
+    // Create test todo list
+    String todoList[4] = {
+            "1.Meow",
+            "2.This is a very long long long long todo list we should be able to wrap it to the next line",
+            "3.I hope this one works",
+            "4.AVeryLongVocabularyShouldBeCutUntilItFillTheScreen"
+    };
 
     uint16_t anchorX = 10, anchorY = 100;
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 4; i++) {
         anchorY = drawWrappedString(anchorX, anchorY, todoList[i].c_str(), &Font16, WHITE, BLACK);
         anchorY += 24;
     }

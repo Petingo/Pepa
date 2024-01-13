@@ -5,17 +5,6 @@ void setup() {
     app.init();
     
     app.displayTest1();
-    
-    // ConnectToWifi();
-    // Sync time with server
-    // Serial.println("Sync time with server...");
-    // HttpResponse time = httpGet(client, host, port, pathGetTime);
-    // Serial.println(time.body);
-
-    // int year=2023, month=11, day=11, hour=11, minute=11, second=11;
-    // sscanf(time.body.c_str(), "%d/%d/%d %d:%d:%d", year, month, day, hour, minute, second);
-    // rtc.setTime(timeResponse.body.toInt() + 3600); // covert to UTC+1
-    // Serial.println("Time is set to: " + rtc.getDateTime());
 }
 
 void loop() {

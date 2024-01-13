@@ -20,13 +20,13 @@ bool Timetable::m_getFirstDepartureOfTheDay(int dayOfWeek, int& outHour, int& ou
     bool succeed = false;
     dayOfWeek = dayOfWeek % 7;
 
-    int (*targetTabel)[10] = m_getTableOfTheDay(dayOfWeek);
+    int (*targetTable)[10] = m_getTableOfTheDay(dayOfWeek);
 
     for(int i = 0 ; i < 24 ; i ++){
-        if(targetTabel[i][0] != -1){
+        if(targetTable[i][0] != -1){
             succeed = true;
             outHour = i;
-            outMinute = targetTabel[i][0];
+            outMinute = targetTable[i][0];
             break;
         }
     }
@@ -39,20 +39,20 @@ void Timetable::getNextDepartureTime(
     int& outHour, int& outMinute)
 {
     if (isHoliday) dayOfWeek = 6;
-    int (*targetTabel)[10] = m_getTableOfTheDay(dayOfWeek);
+    int (*targetTable)[10] = m_getTableOfTheDay(dayOfWeek);
 
     // Find the next departure time
     bool found = false;
 
     // First check if in the same hour, there's one later than the current minute
     for(int i = 0 ; i < 10 ; i++){
-        if(targetTabel[hour][i] == -1){
+        if(targetTable[hour][i] == -1){
             break;
         }
-        if(targetTabel[hour][i] > minute){
+        if(targetTable[hour][i] > minute){
             found = true;
             outHour = hour;
-            outMinute = targetTabel[hour][i];
+            outMinute = targetTable[hour][i];
             break;
         }
     }
@@ -60,11 +60,11 @@ void Timetable::getNextDepartureTime(
     
     // Starting from the next hour, find the first departure time
     for(int i = hour + 1 ; i < 24 ; i ++){
-        if(targetTabel[i][0] == -1) continue;
+        if(targetTable[i][0] == -1) continue;
 
         found = true;
         outHour = i;
-        outMinute = targetTabel[i][0];
+        outMinute = targetTable[i][0];
         break;
     }
     if(found) return;

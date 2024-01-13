@@ -5,24 +5,25 @@ namespace pepa
 
 void ServerComm::init(){
     WiFiConnection::Connect();
-    client.setCACert(m_rootCA);
+    clientSec.setCACert(m_rootCA);
 }
 
 void ServerComm::updateTime(ESP32Time &rtc) {
-    HttpResponse resp = httpGet(m_pathTime);
-    Serial.println("Response: " + resp.data);
+    HttpResponse resp = httpGet(m_pathTimestamp);
+    rtc.setTime(atoll(resp.content.c_str()) + 3600); // convert from UTC to CET
 }
 
-HttpResponse ServerComm::httpGet(String path) {
-    if (client.connect(m_host.c_str(), m_port)) {
-        // Make a HTTP request:
-        client.println("GET " + path + " HTTP/1.1");
-        client.println("Host: " + m_host);
-        client.println("Connection: close");
-        client.println();
-    } else {
+HttpResponse ServerComm::httpGet(const String& path) {
+    if (!client.connect(m_host.c_str(), m_port)) {
         Serial.println("Connection to server failed");
+        return HttpResponse(false);
     }
+
+    // Make a HTTP request:
+    client.println("GET https://" + m_host + path + " HTTP/1.1");
+    client.println("Host: " + m_host);
+    client.println("Connection: close");
+    client.println();
 
     // wait for the server's reply to become available
     int counter = 0;
@@ -32,14 +33,11 @@ HttpResponse ServerComm::httpGet(String path) {
         delay(10);
     }
 
-    if (client.available() > 0)
-    {
-        //read back one line from the server
-        HttpResponse response(client.readStringUntil(EOF));
-        return response;
-    } else {
-        return HttpResponse();
-    }
+    if (client.available() <= 0) return HttpResponse(false);
+
+    //read back one line from the server
+    String rawResponse = client.readStringUntil(EOF);
+    return HttpResponse(rawResponse);
 }
 
 }
