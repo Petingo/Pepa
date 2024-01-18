@@ -5,11 +5,18 @@ namespace pepa
 
 void ServerComm::init(){
     WiFiConnection::Connect();
-    clientSec.setCACert(m_rootCA);
+//    clientSec.setCACert(m_rootCA);
 }
 
 void ServerComm::updateTime(ESP32Time &rtc) {
     HttpResponse resp = httpGet(m_pathTimestamp);
+
+    // for debug
+    if(!resp.succeed){
+        Serial.println("Failed to get timestamp from server");
+        rtc.setTime(1705266901l);
+        return;
+    }
     rtc.setTime(atoll(resp.content.c_str()) + 3600); // convert from UTC to CET
 }
 

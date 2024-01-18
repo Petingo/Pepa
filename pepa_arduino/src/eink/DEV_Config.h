@@ -37,8 +37,8 @@
 /**
  * data
 **/
-#define UBYTE   uint8_t
-#define UWORD   uint16_t
+//#define uint8_t   uint8_t
+//#define uint16_t   uint16_t
 #define UDOUBLE uint32_t
 
 /**
@@ -66,7 +66,7 @@
 #define DEV_Delay_ms(__xms) delay(__xms)
 
 /*------------------------------------------------------------------------------------------------------*/
-UBYTE DEV_Module_Init(void);
-void DEV_SPI_WriteByte(UBYTE data);
+uint8_t DEV_Module_Init(void);
+void DEV_SPI_WriteByte(uint8_t data);
 
 #endif

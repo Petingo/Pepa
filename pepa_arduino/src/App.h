@@ -2,6 +2,7 @@
 #define APP_H
 
 #include <stdint.h>
+#include <Arduino.h>
 
 #include "3rdparty/ESP32Time/ESP32Time.h"
 #include "EInk/DEV_Config.h"
@@ -9,6 +10,7 @@
 #include "EInk/GUI_Paint.h"
 #include "CustomPaint.h"
 #include "ServerComm.h"
+#include "GUI.h"
 
 namespace pepa
 {   
@@ -17,15 +19,20 @@ class App
 public:
     App();
     ~App() = default;
+
     void init();
+    void loopUpdate();
+
     void displayTest1();
-    void displayTest2();
-    
     void getNextDepartureTime();
 
 private:
-    uint8_t *m_displayBuffer;
-    uint16_t m_displaySize;
+    void m_getCurrentTimeString(char* buffer);
+
+public:
+    GUI gui;
+
+private:
     ServerComm m_serverComm;
     ESP32Time m_rtc;
 };

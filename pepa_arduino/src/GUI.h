@@ -1,53 +1,65 @@
-// #ifndef __GUI_PAINT_H
-// #define __GUI_PAINT_H
+#ifndef PEPA_GUI_H
+#define PEPA_GUI_H
 
-// #include "utility/Debug.h"
-// #include "DEV_Config.h"
-// #include "fonts.h"
+#include "eink/EPD.h"
+#include "eink/fonts.h"
+#include "eink/GUI_Paint.h"
 
-// namespace pepa{
+namespace pepa
+{
 
-// class Gui {
-//     Gui() = default;
-//     ~Gui() = default;
+class Block {
+public:
+    Block() = default;
+    Block(uint16_t xStart, uint16_t yStart, uint16_t xEnd, uint16_t yEnd, uint16_t bgColor) :
+        xStart(xStart), yStart(yStart), xEnd(xEnd), yEnd(yEnd), bgColor(bgColor) {}
 
-//     UWORD DrawString(UWORD x, UWORD y, const char * pString,
-//                      sFONT* Font, UWORD colorForeground, UWORD colorBackground);
-// }
+    void clear();
 
-// }
+public:
+    uint16_t xStart = 0;
+    uint16_t yStart = 0;
+    uint16_t xEnd = 0;
+    uint16_t yEnd = 0;
+    uint16_t bgColor = WHITE;
 
-// void Paint_DrawString_EN(UWORD Xstart, UWORD Ystart, const char * pString,
-//                          sFONT* Font, UWORD Color_Foreground, UWORD Color_Background)
-// {
-//     UWORD Xpoint = Xstart;
-//     UWORD Ypoint = Ystart;
+};
 
-//     if (Xstart > Paint.Width || Ystart > Paint.Height) {
-//         Debug("Paint_DrawString_EN Input exceeds the normal display range\r\n");
-//         return;
-//     }
+class FixedTextBlock : public Block {
+public:
+    FixedTextBlock() = default;
+    FixedTextBlock(uint16_t xStart, uint16_t yStart,
+                   sFONT font, uint16_t textLength,
+                   uint16_t textColor, uint16_t bgColor,
+                   char* text = nullptr);
+    ~FixedTextBlock();
 
-//     while (* pString != '\0') {
-//         //if X direction filled , reposition to(Xstart,Ypoint),Ypoint is Y direction plus the Height of the character
-//         if ((Xpoint + Font->Width ) > Paint.Width ) {
-//             Xpoint = Xstart;
-//             Ypoint += Font->Height;
-//         }
+    void setText(char* text) { strncpy(this->text, text, textLength); }
+    void draw();
 
-//         // If the Y direction is full, reposition to(Xstart, Ystart)
-//         if ((Ypoint  + Font->Height ) > Paint.Height ) {
-//             Xpoint = Xstart;
-//             Ypoint = Ystart;
-//         }
-//         Paint_DrawChar(Xpoint, Ypoint, * pString, Font, Color_Background, Color_Foreground);
+public:
+    sFONT font;
+    uint16_t textLength;
+    uint16_t textColor;
+    char* text;
+};
 
-//         //The next character of the address
-//         pString ++;
+class GUI {
+public:
+    GUI();
+    ~GUI();
 
-//         //The next word of the abscissa increases the font of the broadband
-//         Xpoint += Font->Width;
-//     }
-// }
+    FixedTextBlock timeBlock = FixedTextBlock(10, 10, Font24, 5, BLACK, WHITE);
 
-// #endif
+    void init();
+    void draw();
+
+private:
+    uint8_t *m_displayBuffer;
+    uint16_t m_displaySize;
+};
+
+}
+
+
+#endif

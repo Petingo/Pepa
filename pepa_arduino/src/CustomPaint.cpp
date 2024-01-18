@@ -4,14 +4,14 @@ bool isAlphabit(char c){
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
 
-UWORD drawWrappedString(UWORD x, UWORD y, const char * pString,
-                       sFONT* font, UWORD colorForeground, UWORD colorBackground)
+uint16_t drawWrappedString(uint16_t x, uint16_t y, const char * pString,
+                       sFONT* font, uint16_t colorForeground, uint16_t colorBackground)
 {
-    UWORD xPoint = x;
-    UWORD yPoint = y;
+    uint16_t xPoint = x;
+    uint16_t yPoint = y;
 
     // calculate the maximum number of characters per line
-    UWORD maxCharsPerLine = Paint.Width / font->Width - 1;
+    uint16_t maxCharsPerLine = Paint.Width / font->Width - 1;
 
     const char *currentPtr = pString;
     while (*currentPtr != '\0') {

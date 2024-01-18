@@ -47,7 +47,7 @@ function:	Module Initialize, the BCM2835 library and initialize the pins, SPI pr
 parameter:
 Info:
 ******************************************************************************/
-UBYTE DEV_Module_Init(void)
+uint8_t DEV_Module_Init(void)
 {
 	//gpio
 	GPIO_Config();
@@ -68,7 +68,7 @@ UBYTE DEV_Module_Init(void)
 function:
 			SPI read and write
 ******************************************************************************/
-void DEV_SPI_WriteByte(UBYTE data)
+void DEV_SPI_WriteByte(uint8_t data)
 {
     //SPI.beginTransaction(spi_settings);
     digitalWrite(EPD_CS_PIN, GPIO_PIN_RESET);

@@ -31,7 +31,7 @@
 #include "EPD_3in7.h"
 #include "Debug.h"
 
-static const UBYTE lut_4Gray_GC[] =
+static const uint8_t lut_4Gray_GC[] =
 {
 0x2A,0x06,0x15,0x00,0x00,0x00,0x00,0x00,0x00,0x00,//1
 0x28,0x06,0x14,0x00,0x00,0x00,0x00,0x00,0x00,0x00,//2
@@ -46,7 +46,7 @@ static const UBYTE lut_4Gray_GC[] =
 0x22,0x22,0x22,0x22,0x22
 };	
 
-static const UBYTE lut_1Gray_GC[] =
+static const uint8_t lut_1Gray_GC[] =
 {
 0x2A,0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,//1
 0x05,0x2A,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,//2
@@ -61,7 +61,7 @@ static const UBYTE lut_1Gray_GC[] =
 0x22,0x22,0x22,0x22,0x22
 };  
 
-static const UBYTE lut_1Gray_DU[] =
+static const uint8_t lut_1Gray_DU[] =
 {
 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,//1
 0x01,0x2A,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -76,7 +76,7 @@ static const UBYTE lut_1Gray_DU[] =
 0x22,0x22,0x22,0x22,0x22
 }; 
 
-static const UBYTE lut_1Gray_A2[] =
+static const uint8_t lut_1Gray_A2[] =
 {
 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //1
 0x0A,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //2
@@ -110,7 +110,7 @@ function :	send command
 parameter:
      Reg : Command register
 ******************************************************************************/
-static void EPD_3IN7_SendCommand(UBYTE Reg)
+static void EPD_3IN7_SendCommand(uint8_t Reg)
 {
     DEV_Digital_Write(EPD_DC_PIN, 0);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -123,7 +123,7 @@ function :	send data
 parameter:
     Data : Write data
 ******************************************************************************/
-static void EPD_3IN7_SendData(UBYTE Data)
+static void EPD_3IN7_SendData(uint8_t Data)
 {
     DEV_Digital_Write(EPD_DC_PIN, 1);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -134,7 +134,7 @@ static void EPD_3IN7_SendData(UBYTE Data)
 static void EPD_3IN7_ReadBusy_HIGH(void)
 {
     Debug("e-Paper busy\r\n");
-    UBYTE busy;
+    uint8_t busy;
     do {
         busy = DEV_Digital_Read(EPD_BUSY_PIN);
     } while(busy);
@@ -146,9 +146,9 @@ static void EPD_3IN7_ReadBusy_HIGH(void)
 function :	set the look-up tables
 parameter:
 ******************************************************************************/
-void EPD_3IN7_Load_LUT(UBYTE lut)
+void EPD_3IN7_Load_LUT(uint8_t lut)
 {
-  UWORD i;
+  uint16_t i;
   EPD_3IN7_SendCommand(0x32);
   for (i = 0; i < 105; i++)
   {
@@ -327,7 +327,7 @@ parameter:
 ******************************************************************************/
 void EPD_3IN7_4Gray_Clear(void)
 {
-    UWORD Width, Height;
+    uint16_t Width, Height;
     Width = (EPD_3IN7_WIDTH % 8 == 0)? (EPD_3IN7_WIDTH / 8 ): (EPD_3IN7_WIDTH / 8 + 1);
     Height = EPD_3IN7_HEIGHT;
 
@@ -341,8 +341,8 @@ void EPD_3IN7_4Gray_Clear(void)
     EPD_3IN7_SendData(0x00);
     
     EPD_3IN7_SendCommand(0x24);
-    for (UWORD j = 0; j < Height; j++) {
-       for (UWORD i = 0; i < Width; i++) {
+    for (uint16_t j = 0; j < Height; j++) {
+       for (uint16_t i = 0; i < Width; i++) {
            EPD_3IN7_SendData(0xff);
        }
     }
@@ -356,8 +356,8 @@ void EPD_3IN7_4Gray_Clear(void)
     EPD_3IN7_SendData(0x00);
     
     EPD_3IN7_SendCommand(0x26);
-    for (UWORD j = 0; j < Height; j++) {
-       for (UWORD i = 0; i < Width; i++) {
+    for (uint16_t j = 0; j < Height; j++) {
+       for (uint16_t i = 0; i < Width; i++) {
            EPD_3IN7_SendData(0xff);
        }
     }
@@ -376,8 +376,8 @@ parameter:
 ******************************************************************************/
 void EPD_3IN7_1Gray_Clear(void)
 {
-  UWORD i;
-  UWORD IMAGE_COUNTER = EPD_3IN7_WIDTH * EPD_3IN7_HEIGHT / 8;
+  uint16_t i;
+  uint16_t IMAGE_COUNTER = EPD_3IN7_WIDTH * EPD_3IN7_HEIGHT / 8;
 
   EPD_3IN7_SendCommand(0x4E);
   EPD_3IN7_SendData(0x00);
@@ -402,10 +402,10 @@ void EPD_3IN7_1Gray_Clear(void)
 function :	Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/
-void EPD_3IN7_4Gray_Display(const UBYTE *Image)
+void EPD_3IN7_4Gray_Display(const uint8_t *Image)
 {
     UDOUBLE i,j,k;
-    UBYTE temp1,temp2,temp3;
+    uint8_t temp1,temp2,temp3;
     
     EPD_3IN7_SendCommand(0x49);
     EPD_3IN7_SendData(0x00);
@@ -516,10 +516,10 @@ void EPD_3IN7_4Gray_Display(const UBYTE *Image)
 function :  Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/
-void EPD_3IN7_1Gray_Display(const UBYTE *Image)
+void EPD_3IN7_1Gray_Display(const uint8_t *Image)
 {
-  UWORD i;
-  UWORD IMAGE_COUNTER = EPD_3IN7_WIDTH * EPD_3IN7_HEIGHT / 8;
+  uint16_t i;
+  uint16_t IMAGE_COUNTER = EPD_3IN7_WIDTH * EPD_3IN7_HEIGHT / 8;
 
   EPD_3IN7_SendCommand(0x4E);
   EPD_3IN7_SendData(0x00);
@@ -543,11 +543,11 @@ void EPD_3IN7_1Gray_Display(const UBYTE *Image)
 function :  Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/
-void EPD_3IN7_1Gray_Display_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
+void EPD_3IN7_1Gray_Display_Part(const uint8_t *Image, uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend)
 {
-  UWORD i, Width;
+  uint16_t i, Width;
   Width = (Xend-Xstart)%8 == 0 ? (Xend-Xstart)/8 : (Xend-Xstart)/8+1;
-  UWORD IMAGE_COUNTER = Width * (Yend-Ystart);
+  uint16_t IMAGE_COUNTER = Width * (Yend-Ystart);
 
   EPD_3IN7_SendCommand(0x44);
   EPD_3IN7_SendData(Xstart & 0xff);

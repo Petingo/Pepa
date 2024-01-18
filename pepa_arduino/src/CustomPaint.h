@@ -21,7 +21,7 @@ bool isAlphabit(char c);
  * @return: the y position of the last drawn line
  * 
  */
-UWORD drawWrappedString(UWORD x, UWORD y, const char * pString,
-                       sFONT* font, UWORD colorForeground, UWORD colorBackground);
+uint16_t drawWrappedString(uint16_t x, uint16_t y, const char * pString,
+                       sFONT* font, uint16_t colorForeground, uint16_t colorBackground);
 
 #endif
