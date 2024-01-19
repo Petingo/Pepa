@@ -10,14 +10,14 @@
 #include "EInk/GUI_Paint.h"
 #include "CustomPaint.h"
 #include "ServerComm.h"
-#include "GUI.h"
+#include "GUI/GUI.h"
 
 namespace pepa
 {   
 class App
 {
 public:
-    App();
+    App() = default;
     ~App() = default;
 
     void init();

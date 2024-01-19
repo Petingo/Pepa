@@ -9,7 +9,8 @@ void setup() {
 void loop() {
      Serial.println("loop");
      app.loopUpdate();
-     delay(3000);
+     EPD_3IN7_Sleep();
+     delay(5000);
 
   // Paint_SelectImage(BlackImage);
   // Paint_SetScale(2);

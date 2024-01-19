@@ -5,11 +5,6 @@
 namespace pepa
 {
 
-App::App()
-{
-
-}
-
 void App::init()
 {
     DEV_Module_Init();
@@ -32,8 +27,16 @@ void App::init()
 
 void App::loopUpdate() {
     char timeString[6];
-    sprintf(timeString, "%02d:%02d", m_rtc.getMinute(), m_rtc.getSecond());
+    sprintf(timeString, "%02d:%02d", m_rtc.getHour(true), m_rtc.getSecond());
     gui.timeBlock.setText(timeString);
+
+//    char bus24TimeString[6];
+//    sprintf(bus24TimeString, "%2dmin", 13);
+//    gui.bus24TimeBlock.setText(bus24TimeString);
+//
+//    char bus1TimeString[6];
+//    sprintf(bus24TimeString, "%2dmin", 5);
+//    gui.bus1TimeBlock.setText(bus24TimeString);
 
     gui.draw();
 }
