@@ -8,8 +8,8 @@
 #include "EInk/DEV_Config.h"
 #include "EInk/EPD.h"
 #include "EInk/GUI_Paint.h"
-#include "CustomPaint.h"
-#include "ServerComm.h"
+#include "gui/CustomPaint.h"
+#include "internet/ServerComm.h"
 #include "GUI/GUI.h"
 
 namespace pepa

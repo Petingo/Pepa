@@ -1,7 +1,3 @@
-//
-// Created by Petingo on 2024/1/18.
-//
-
 #ifndef PEPA_BLOCK_H
 #define PEPA_BLOCK_H
 

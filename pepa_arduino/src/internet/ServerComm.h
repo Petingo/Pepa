@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <WiFiClientSecure.h>
 
-#include "3rdparty/ESP32Time/ESP32Time.h"
+#include "../3rdparty/ESP32Time/ESP32Time.h"
 
 #include "WiFiConnection.h"
 #include "HttpResponse.h"

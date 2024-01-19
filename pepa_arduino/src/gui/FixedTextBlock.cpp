@@ -28,21 +28,21 @@ namespace pepa {
         Paint_DrawString_EN(xStart, yStart, text, &font, textColor, bgColor);
     }
 
-//    FixedTextBlock& FixedTextBlock::operator=(const FixedTextBlock& other){
-//        if(this != &other) {
-//            Block::operator=(other);
-//            font = other.font;
-//            textLength = other.textLength;
-//            textColor = other.textColor;
-//
-//            if(text != nullptr) {
-//                free(text);
-//            }
-//            text = (char *) malloc(textLength + 1);
-//
-//            strncpy(text, other.text, textLength);
-//        }
-//        return *this;
-//    }
+    FixedTextBlock& FixedTextBlock::operator=(const FixedTextBlock& other){
+        if(this != &other) {
+            Block::operator=(other);
+            font = other.font;
+            textLength = other.textLength;
+            textColor = other.textColor;
+
+            if(text != nullptr) {
+                free(text);
+            }
+            text = (char *) malloc(textLength + 1);
+            memset(text, 0, textLength + 1);
+            strncpy(text, other.text, textLength);
+        }
+        return *this;
+    }
 
 } // pepa

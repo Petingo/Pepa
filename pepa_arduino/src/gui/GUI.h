@@ -15,6 +15,7 @@ namespace pepa
         ~GUI();
 
         FixedTextBlock timeBlock = FixedTextBlock(10, 12, Font24, 5, BLACK, WHITE);
+        FixedTextBlock tempMoistBlock = FixedTextBlock(10, 40, Font20, 7, GRAY3, WHITE);
 
         FixedTextBlock bus24LabelBlock;
         FixedTextBlock bus24TimeBlock;
@@ -30,8 +31,6 @@ namespace pepa
 
         FixedTextBlock bus25ELabelBlock;
         FixedTextBlock bus25ETimeBlock;
-
-
 
         void init();
         void draw();

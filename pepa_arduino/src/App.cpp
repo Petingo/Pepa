@@ -1,6 +1,6 @@
 #include "App.h"
-#include "WiFiConnection.h"
-#include "TimetableInstance.h"
+#include "internet/WiFiConnection.h"
+#include "timetable/TimetableInstance.h"
 
 namespace pepa
 {
@@ -30,13 +30,20 @@ void App::loopUpdate() {
     sprintf(timeString, "%02d:%02d", m_rtc.getHour(true), m_rtc.getSecond());
     gui.timeBlock.setText(timeString);
 
-//    char bus24TimeString[6];
-//    sprintf(bus24TimeString, "%2dmin", 13);
-//    gui.bus24TimeBlock.setText(bus24TimeString);
-//
-//    char bus1TimeString[6];
-//    sprintf(bus24TimeString, "%2dmin", 5);
-//    gui.bus1TimeBlock.setText(bus24TimeString);
+    char bus24TimeString[6] = "13/28";
+    gui.bus24TimeBlock.setText(bus24TimeString);
+
+    char bus2TimeString[6] = " 5/ 9";
+    gui.bus2TimeBlock.setText(bus2TimeString);
+
+    char bus1TimeString[6] = "<1/16";
+    gui.bus1TimeBlock.setText(bus1TimeString);
+
+    char bus25WTimeString[6] = "<1/16";
+    gui.bus25WTimeBlock.setText(bus25WTimeString);
+
+    char bus25ETimeString[6] = "<1/16";
+    gui.bus25ETimeBlock.setText(bus25ETimeString);
 
     gui.draw();
 }
@@ -70,11 +77,6 @@ void App::displayTest1()
 //        anchorY = drawWrappedString(anchorX, anchorY, todoList[i].c_str(), &Font16, WHITE, BLACK);
 //        anchorY += 24;
 //    }
-
-//    gui.draw();
-//     EPD_3IN7_4Gray_Display(gui.m_displayBuffer);
-
-//     gui.draw();
 }
 
 void App::getNextDepartureTime()

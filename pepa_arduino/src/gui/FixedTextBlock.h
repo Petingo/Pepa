@@ -1,7 +1,3 @@
-//
-// Created by Petingo on 2024/1/18.
-//
-
 #ifndef PEPA_FIXEDTEXTBLOCK_H
 #define PEPA_FIXEDTEXTBLOCK_H
 
@@ -18,10 +14,12 @@ namespace pepa {
                        char text[] = nullptr);
         ~FixedTextBlock();
 
-        void setText(char* text) { strncpy(this->text, text, textLength); }
+        void setText(char text[]) {
+            strncpy(this->text, text, textLength);
+        }
         virtual void draw() override;
 
-//        FixedTextBlock& operator=(const FixedTextBlock& other);
+        FixedTextBlock& operator=(const FixedTextBlock& other);
 
     public:
         sFONT font;

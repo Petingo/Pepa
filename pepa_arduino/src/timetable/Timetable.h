@@ -1,7 +1,7 @@
 #ifndef TIMETABLE_H
 #define TIMETABLE_H
 
-#include "3rdparty/ESP32Time/ESP32Time.h"
+#include "../3rdparty/ESP32Time/ESP32Time.h"
 
 namespace pepa
 {
