@@ -31,7 +31,7 @@ If the request is executed successfully, two dictionaries will be returned: `all
 
 ### all_departure_data
 - Bus line number → Destination ID → List of departure time 
-```json
+```
 {'1': {'8591994': ['2024-01-24T22:15:00Z',
                    '2024-01-24T22:30:00Z',
                    '2024-01-24T22:45:00Z',
@@ -75,7 +75,7 @@ If the request is executed successfully, two dictionaries will be returned: `all
 ```
 ### all_destination_data
 - Destination ID → Destination name
-```json
+```
 {'8501210': 'Lausanne, Bourdonnette',
  '8579254': 'Lausanne, St-François',
  '8588445': 'Pully, gare',
