@@ -1,6 +1,5 @@
 import requests
 from typing import List
-from pprint import pprint
 from datetime import datetime
 from bs4 import BeautifulSoup
 
@@ -88,6 +87,7 @@ class SwissTransportAPI:
         
 
 if __name__ == "__main__":
+    from pprint import pprint
     try:
         from key import key
     except ImportError:
