@@ -2,6 +2,7 @@
 .metals
 .DS_Store
 .idea
+key.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

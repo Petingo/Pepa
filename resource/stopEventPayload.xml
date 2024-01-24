@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Trias version="1.1" xmlns="http://www.vdv.de/trias" xmlns:siri="http://www.siri.org.uk/siri" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ServiceRequest>
+        <siri:RequestTimestamp>2024-01-23T23:27:37.690Z</siri:RequestTimestamp>
+        <siri:RequestorRef>API-Explorer</siri:RequestorRef>
+        <RequestPayload>
+            <StopEventRequest>
+                <Location>
+                    <LocationRef>
+                        <StopPointRef>8592068</StopPointRef>
+                    </LocationRef>
+                </Location>
+                <Params>
+                    <NumberOfResults>2</NumberOfResults>
+                    <StopEventType>departure</StopEventType>
+                    <IncludePreviousCalls>false</IncludePreviousCalls>
+                    <IncludeOnwardCalls>false</IncludeOnwardCalls>
+                    <IncludeRealtimeData>true</IncludeRealtimeData>
+                </Params>
+            </StopEventRequest>
+        </RequestPayload>
+    </ServiceRequest>
+</Trias>
