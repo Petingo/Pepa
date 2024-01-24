@@ -13,8 +13,8 @@ the [TRIAS 2020 API](https://opentransportdata.swiss/en/cookbook/departurearriva
 
 The interface/function we have here is designed to monitor a list of bus stops. The usage of the API is as follows:
 ```python
-stations_to_request = ["8592068", "8593838", "8593837", "8595938"]
-api = SwissTransportAPI(key=key, stations_to_monitor=stations_to_request)
+stations_to_monitor = ["8592068", "8593838", "8593837", "8595938"]
+api = SwissTransportAPI(key=key, stations_to_monitor=stations_to_monitor)
 all_departure_data, all_destination_data = api.get_all_departure_data()
 ```
 The API key can be requested without charge after registering an account in [Open data platform mobility Switzerland](https://opentransportdata.swiss/en/). 

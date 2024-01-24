@@ -92,9 +92,9 @@ if __name__ == "__main__":
         from key import key
     except ImportError:
         pass
-    
-    stations_to_request = ["8592068", "8593838", "8593837", "8595938"]
-    api = SwissTransportAPI(key=key, stations_to_monitor=stations_to_request)
+
+    stations_to_monitor = ["8592068", "8593838", "8593837", "8595938"]
+    api = SwissTransportAPI(key=key, stations_to_monitor=stations_to_monitor)
     all_departure_data, all_destination_data = api.get_all_departure_data()
     
     pprint(all_departure_data)
