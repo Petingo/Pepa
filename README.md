@@ -3,10 +3,21 @@ An e-paper display for personalized information.
 
 ![](resource/img/WIP_20240119.jpg)
 
-## Features
+## File structure
+```
+📦 Pepa
+├─ 3d                       # 3D model of the case for 3D printing
+├─ pepa_arduino             
+│  ├─ pepa_arduino.ino      # Arduino project for the ESP32 board
+│  └─ src                   # Source code that runs on the ESP32 board
+├─ pepa_server              # Source code that runs on the backend server
+└─ resource                 # Misc, reference files & notes & etc
+```
+
+## Progress
 - [x] Display time
-- [ ] Display temperature & humidity
 - [ ] Bus arrival time
+- [ ] Display temperature & humidity
 - [ ] TODO list
 - [ ] Pomodoro timer
 - [ ] Buzzer

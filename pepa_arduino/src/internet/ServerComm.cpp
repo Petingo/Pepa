@@ -5,7 +5,7 @@ namespace pepa
 
 void ServerComm::init(){
     WiFiConnection::Connect();
-//    clientSec.setCACert(m_rootCA);
+    // clientSec.setCACert(m_rootCA);
 }
 
 void ServerComm::updateTime(ESP32Time &rtc) {

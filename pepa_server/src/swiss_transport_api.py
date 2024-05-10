@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 
 class SwissTransportAPI:
     def __init__(self, key: str = "57c5dbbbf1fe4d000100001842c323fa9ff44fbba0b9b925f0c052d1", stations_to_monitor: List[str] = []) -> None:
+        """Init the instance, if the key is not setted, the default testing key is used."""
         self.key = key
         self.stations_to_monitor = stations_to_monitor
         self.__headers = {
@@ -13,6 +14,15 @@ class SwissTransportAPI:
         }
         
     def __parse_response(self, response: requests.Response):
+        """
+        Parse the response from the API
+
+        Args:
+            response (requests.Response): The response from the API
+
+        Returns:
+            tuple(dict, dict): departure_data, destination_data
+        """
         if response.status_code != 200:
             print("Error:", response.status_code)
             return {}

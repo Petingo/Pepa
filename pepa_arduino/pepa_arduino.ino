@@ -7,7 +7,6 @@ void setup() {
 }
 
 void loop() {
-     app.loopUpdate();
-    //  EPD_3IN7_Sleep();
-     delay(5000);
+    app.loopUpdate();
+    delay(5000);
 }

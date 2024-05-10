@@ -2,6 +2,7 @@
 
 namespace pepa
 {
+    
 int (*Timetable::m_getTableOfTheDay(int dayOfWeek))[10] {
     // Sunday
     if(dayOfWeek == 6) {

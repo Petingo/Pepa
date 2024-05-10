@@ -5,6 +5,9 @@
 
 namespace pepa {
 
+/**
+ * @brief: For connecting to WiFi AP
+ */
 class WiFiConnection
 {
 public:

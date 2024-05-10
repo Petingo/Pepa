@@ -1,9 +1,9 @@
 #ifndef CUSTOM_PAINT_H
 #define CUSTOM_PAINT_H
 
-#include "../eink/GUI_Paint.h"
-#include "../eink/DEV_Config.h"
-#include "../eink/Debug.h"
+#include "../3rdparty/eink/GUI_Paint.h"
+#include "../3rdparty/eink/DEV_Config.h"
+#include "../3rdparty/eink/Debug.h"
 
 bool isAlphabit(char c);
 

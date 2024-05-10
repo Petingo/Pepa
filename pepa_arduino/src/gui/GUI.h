@@ -3,12 +3,16 @@
 
 #include "Block.h"
 #include "FixedTextBlock.h"
-#include "../eink/EPD.h"
-#include "../eink/fonts.h"
-#include "../eink/GUI_Paint.h"
+#include "../3rdparty/eink/EPD.h"
+#include "../3rdparty/eink/fonts.h"
+#include "../3rdparty/eink/GUI_Paint.h"
 
 namespace pepa
 {
+
+    /**
+     * @brief: The GUI class that contains all the elements to be drawn on the screen
+     */
     class GUI {
     public:
         GUI();
@@ -32,7 +36,14 @@ namespace pepa
         FixedTextBlock bus25ELabelBlock;
         FixedTextBlock bus25ETimeBlock;
 
+        /**
+         * @brief: Initialize the GUI, creating all the instances of the elements
+         */
         void init();
+
+        /**
+         * @brief: Redraw all the elements on the screen
+         */
         void draw();
 
     private:

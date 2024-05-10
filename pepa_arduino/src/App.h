@@ -13,18 +13,28 @@
 #include "GUI/GUI.h"
 
 namespace pepa
-{   
+{
+
 class App
 {
 public:
     App() = default;
     ~App() = default;
 
+    /**
+     * @brief: Initialize the app, including the GUI, server communication, and RTC
+     */
     void init();
+
+    /**
+     * @brief: Called in the Arduino loop, update the info and refresh the screen
+     */
     void loopUpdate();
 
-    void displayTest1();
+
+    // below are the functions for testing
     void getNextDepartureTime();
+    void displayTest1();
 
 private:
     void m_getCurrentTimeString(char* buffer);

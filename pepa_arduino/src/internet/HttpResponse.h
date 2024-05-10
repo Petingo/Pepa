@@ -6,6 +6,9 @@
 
 namespace pepa{
 
+/**
+ * @brief: The class for parsing the HTTP response from the server
+ */
 class HttpResponse
 {
 public:
@@ -15,19 +18,20 @@ public:
         UNKNOWN
     };
 
-    bool succeed;
-
-    int contentLength;
-    int status;
-    ContentType contentType;
-    String content;
-
     HttpResponse(bool succeed);
     HttpResponse(String& response);
 
     ~HttpResponse() = default;
 
     String toString();
+
+public:
+    bool succeed;
+
+    int contentLength;
+    int status;
+    ContentType contentType;
+    String content;
 
 private:
     void parseHeader(String& response);
