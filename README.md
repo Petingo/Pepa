@@ -1,5 +1,5 @@
 # Pepa
-An e-paper display for personalized information.
+An e-paper display for personalized information, including the time, weather, and bus departure time.
 
 ![](resource/img/WIP_20240119.jpg)
 
