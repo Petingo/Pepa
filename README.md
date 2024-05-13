@@ -1,5 +1,7 @@
 # Pepa
 An e-paper display for personalized information, including the time, weather, and bus departure time.
+The program for the device is written in C++ with Arduino environment for ESP32.
+The backend server uses Python and [flask](https://flask.palletsprojects.com/en/3.0.x/)
 
 ![](resource/img/WIP_20240119.jpg)
 
